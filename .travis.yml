@@ -4,8 +4,8 @@ cache: false
 env:
 - URL=https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.tar.xz
 before_install:
-- openssl aes-256-cbc -K $encrypted_76f778abd5a2_key -iv $encrypted_76f778abd5a2_iv
-  -in assets/server.key.enc -out assets/server.key -d
+- openssl aes-256-cbc -k "$key_pass" -in assets/server.key.enc 
+  -out assets/server.key -d
 - export SFDX_AUTOUPDATE_DISABLE=false
 - export SFDX_USE_GENERIC_UNIX_KEYCHAIN=true
 - export SFDX_DOMAIN_RETRY=300
@@ -26,3 +26,5 @@ script:
 - sfdx force:source:push -u ciorg
 - sfdx force:apex:test:run -u ciorg --wait 10
 - sfdx force:org:delete -u ciorg -p
+dd:
+  secure: T15X9vhzT2WzNFIK7vQ/WBipn6MPes7udCr8BExfTo5uN9UNcgXaDLl/u4AsP7AfTOg/2zDMKXjE0IoNzlwIAEj+B/T6JjTxPkQchTKyBnIzdfQjOusJQ1MtNA1gudqsWkHp1p7hZU+krXdZjzxgM/sEFDgto68NBl/Mmm7fFJMjrQFwsuU4xZ9WOqn00jeowAhrCbIh424SutExAUW9K9q/cSoMpbD+9ixe82FMOnlACnQu+jROSuCGdoFkfUmdm7LisY/yKCUSjlzH7o2KkIt5xWJB8FjMij8fV3/YXSTHVs+47F9YmG5nLlu20AHcaLWpE29lRHVd055gKYCuDsjp0SA9ax1N7JjiET38ZRhv7qak8oqepqwqHywE1aIzFwjFrp4nh3DY+jif66fA5U89maoA/VYheBRUus+Wf8ztLI3a06e6Cf5LwKuD515WQn56Pu/hLc+x98xQKKm/L+CRaWOS3DwNW3Jw9UibQa/5s0W0u7bPnlXrWiD3ZkXuJP9IuzEJet/7j0gF57XuPNbTWFQIfhb+zbTVLhKlJQsg/OoSonFkoVKP9eyiFnLe6kCp3rxm5dzM7tsy7Uz+xcmJOhbtq4VlIPAcGLn286QbPvGEc0+r19cqWUyJ6+/R8N8XkOQjtnAgLGUbBT1YGUSdzQIs+M0bfvG5/hUVBOA=
